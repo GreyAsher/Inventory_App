@@ -110,7 +110,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         {/* Total Sales */}
         <div
           onClick={() => onNavigate('sales')}
-          className="bg-white p-5 rounded-2xl border border-gray-200/80 shadow-xs hover:border-[#00ADB5]/50 transition-all cursor-pointer group"
+          className="bg-white p-5 rounded-2xl border border-gray-200/80 shadow-sm hover:border-[#00ADB5]/50 transition-all cursor-pointer group"
         >
           <div className="flex items-center justify-between mb-3">
             <span className="text-sm font-semibold text-gray-500">Total Sales</span>
@@ -130,7 +130,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         {/* Total Products */}
         <div
           onClick={() => onNavigate('products')}
-          className="bg-white p-5 rounded-2xl border border-gray-200/80 shadow-xs hover:border-[#00ADB5]/50 transition-all cursor-pointer group"
+          className="bg-white p-5 rounded-2xl border border-gray-200/80 shadow-sm hover:border-[#00ADB5]/50 transition-all cursor-pointer group"
         >
           <div className="flex items-center justify-between mb-3">
             <span className="text-sm font-semibold text-gray-500">Total Products</span>
@@ -145,7 +145,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         {/* Out of Stock */}
         <div
           onClick={() => onNavigate('stock')}
-          className="bg-white p-5 rounded-2xl border border-gray-200/80 shadow-xs hover:border-red-300 transition-all cursor-pointer group"
+          className="bg-white p-5 rounded-2xl border border-gray-200/80 shadow-sm hover:border-red-300 transition-all cursor-pointer group"
         >
           <div className="flex items-center justify-between mb-3">
             <span className="text-sm font-semibold text-gray-500">Out of Stock</span>
@@ -166,7 +166,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         {/* Total Suppliers */}
         <div
           onClick={() => onNavigate('suppliers')}
-          className="bg-white p-5 rounded-2xl border border-gray-200/80 shadow-xs hover:border-[#00ADB5]/50 transition-all cursor-pointer group"
+          className="bg-white p-5 rounded-2xl border border-gray-200/80 shadow-sm hover:border-[#00ADB5]/50 transition-all cursor-pointer group"
         >
           <div className="flex items-center justify-between mb-3">
             <span className="text-sm font-semibold text-gray-500">Suppliers</span>
@@ -182,7 +182,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       {/* Main Charts & Lists Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Sales Trend Plot Model (OxyPlot style replication) */}
-        <div className="lg:col-span-2 bg-white p-6 rounded-2xl border border-gray-200/80 shadow-xs">
+        <div className="lg:col-span-2 bg-white p-6 rounded-2xl border border-gray-200/80 shadow-sm">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-lg font-bold text-gray-900">Analysis Preview</h2>
@@ -229,7 +229,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         </div>
 
         {/* Best Selling Products */}
-        <div className="bg-white p-6 rounded-2xl border border-gray-200/80 shadow-xs flex flex-col">
+        <div className="bg-white p-6 rounded-2xl border border-gray-200/80 shadow-sm flex flex-col">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-bold text-gray-900">Best-Selling Products</h2>
             <span className="text-xs font-medium text-gray-400">Top Units</span>
