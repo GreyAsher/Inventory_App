@@ -8,7 +8,9 @@ import {
   ShoppingCart,
   BarChart3,
   LogOut,
-  UserCheck
+  UserCheck,
+  Sun,
+  Moon,
 } from 'lucide-react';
 
 export type NavTab =
@@ -25,6 +27,8 @@ interface SidebarProps {
   onSelectTab: (tab: NavTab) => void;
   currentUser: string | null;
   onLogout: () => void;
+  darkMode: boolean;
+  onToggleDarkMode: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -32,6 +36,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onSelectTab,
   currentUser,
   onLogout,
+  darkMode,
+  onToggleDarkMode,
 }) => {
   const menuItems: { id: NavTab; label: string; icon: React.ReactNode }[] = [
     { id: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard className="w-5 h-5 mr-3" /> },
@@ -66,7 +72,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <button
               key={item.id}
               onClick={() => onSelectTab(item.id)}
-              className={`w-full flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all duration-150 ${
+              className={`w-full flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all duration-150 cursor-pointer ${
                 isActive
                   ? 'bg-[#00ADB5] text-white shadow-md shadow-[#00ADB5]/20 font-semibold translate-x-1'
                   : 'text-gray-300 hover:bg-white/10 hover:text-white'
@@ -79,11 +85,45 @@ export const Sidebar: React.FC<SidebarProps> = ({
         })}
       </nav>
 
+      {/* Dark / Light Theme Toggle Pill */}
+      <div className="px-4 py-3 border-t border-gray-600/50">
+        <div className="bg-white/5 p-1 rounded-xl flex items-center gap-1 border border-white/10">
+          <button
+            type="button"
+            onClick={() => {
+              if (darkMode) onToggleDarkMode();
+            }}
+            className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+              !darkMode
+                ? 'bg-[#00ADB5] text-white shadow-xs'
+                : 'text-gray-400 hover:text-white hover:bg-white/5'
+            }`}
+          >
+            <Sun className="w-3.5 h-3.5" />
+            <span>Light</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              if (!darkMode) onToggleDarkMode();
+            }}
+            className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+              darkMode
+                ? 'bg-[#00ADB5] text-white shadow-xs'
+                : 'text-gray-400 hover:text-white hover:bg-white/5'
+            }`}
+          >
+            <Moon className="w-3.5 h-3.5" />
+            <span>Dark</span>
+          </button>
+        </div>
+      </div>
+
       {/* Bottom Session Info & Logout */}
       <div className="p-4 border-t border-gray-600/50">
         <button
           onClick={onLogout}
-          className="w-full flex items-center justify-center px-4 py-2.5 rounded-lg text-sm font-medium text-gray-300 hover:bg-red-500/20 hover:text-red-300 transition-colors"
+          className="w-full flex items-center justify-center px-4 py-2.5 rounded-lg text-sm font-medium text-gray-300 hover:bg-red-500/20 hover:text-red-300 transition-colors cursor-pointer"
         >
           <LogOut className="w-4 h-4 mr-2" />
           <span>Sign Out</span>

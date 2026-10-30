@@ -25,6 +25,32 @@ import {
 import { RotateCcw } from 'lucide-react';
 
 export function App() {
+  // Theme state
+  const [darkMode, setDarkMode] = useState<boolean>(() => {
+    try {
+      const saved = localStorage.getItem('inventory_dark_mode');
+      if (saved !== null) {
+        return saved === 'true';
+      }
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    } catch {
+      return false;
+    }
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('inventory_dark_mode', String(darkMode));
+      if (darkMode) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    } catch {}
+  }, [darkMode]);
+
+  const toggleDarkMode = () => setDarkMode((prev) => !prev);
+
   // Auth state
   const [currentUser, setCurrentUser] = useState<string | null>(() => {
     return localStorage.getItem('porcelain_user') || 'Admin';
@@ -223,25 +249,27 @@ export function App() {
   };
 
   if (!currentUser) {
-    return <LoginModal onLogin={handleLogin} />;
+    return <LoginModal onLogin={handleLogin} darkMode={darkMode} onToggleDarkMode={toggleDarkMode} />;
   }
 
   return (
-    <div className="flex min-h-screen bg-[#F4F6F9]">
+    <div className="flex min-h-screen bg-[#F4F6F9] dark:bg-[#121417]">
       {/* Sidebar Navigation */}
       <Sidebar
         currentTab={currentTab}
         onSelectTab={setCurrentTab}
         currentUser={currentUser}
         onLogout={handleLogout}
+        darkMode={darkMode}
+        onToggleDarkMode={toggleDarkMode}
       />
 
       {/* Main Content Area */}
       <main className="flex-1 flex flex-col min-w-0 overflow-y-auto max-h-screen">
         {/* Top bar with quick demo reset */}
-        <header className="bg-white border-b border-gray-200 px-6 py-3.5 flex items-center justify-between no-print">
+        <header className="bg-white dark:bg-[#1E2227] border-b border-gray-200 dark:border-gray-800 px-6 py-3.5 flex items-center justify-between no-print transition-colors">
           <div className="flex items-center gap-2">
-            <span className="text-sm font-semibold text-gray-700 capitalize">
+            <span className="text-sm font-semibold text-gray-700 dark:text-gray-200 capitalize">
               {currentTab === 'dashboard' ? 'Overview' : currentTab}
             </span>
           </div>
@@ -250,13 +278,13 @@ export function App() {
             <button
               onClick={handleResetData}
               title="Reset Sample Data"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-600 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors cursor-pointer"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               <span>Reset Demo Data</span>
             </button>
-            <div className="h-4 w-px bg-gray-300" />
-            <div className="text-xs text-gray-500">
+            <div className="h-4 w-px bg-gray-300 dark:bg-gray-700" />
+            <div className="text-xs text-gray-500 dark:text-gray-400">
               Inventory App v1.0
             </div>
           </div>

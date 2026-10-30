@@ -184,16 +184,16 @@ export const SalesView: React.FC<SalesViewProps> = ({
     <div className="space-y-6">
       {/* Title */}
       <div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 tracking-tight">
           Sales Transactions
         </h1>
-        <p className="text-sm text-gray-500 mt-1">
+        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
           Create new sales invoices, track receipts, and manage transaction history
         </p>
       </div>
 
       {/* Toolbar */}
-      <div className="bg-white p-4 rounded-2xl border border-gray-200/80 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-white dark:bg-[#1E2227] p-4 rounded-2xl border border-gray-200/80 dark:border-gray-800 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         {/* New Invoice Button */}
         <button
           onClick={() => {
@@ -209,12 +209,12 @@ export const SalesView: React.FC<SalesViewProps> = ({
         </button>
 
         <div className="flex flex-wrap items-center gap-3">
-          <div className="flex items-center gap-2 text-sm text-gray-600">
+          <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
             <span className="font-medium whitespace-nowrap">Sort by:</span>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#00ADB5] bg-white cursor-pointer"
+              className="px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#00ADB5] bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 cursor-pointer"
             >
               <option value="Date">Date</option>
               <option value="Total Amount">Total Amount</option>
@@ -229,17 +229,17 @@ export const SalesView: React.FC<SalesViewProps> = ({
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
               placeholder="Search invoice or customer..."
-              className="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#00ADB5]"
+              className="w-full pl-9 pr-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#00ADB5]"
             />
           </div>
         </div>
       </div>
 
       {/* Sales Transactions DataGrid */}
-      <div className="bg-white rounded-2xl border border-gray-200/80 shadow-xs overflow-hidden">
+      <div className="bg-white dark:bg-[#1E2227] rounded-2xl border border-gray-200/80 dark:border-gray-800 shadow-xs overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm text-gray-700">
-            <thead className="bg-[#393E46] text-white text-xs uppercase tracking-wider font-semibold">
+          <table className="w-full text-left text-sm text-gray-700 dark:text-gray-300">
+            <thead className="bg-[#393E46] dark:bg-[#181A1E] text-white text-xs uppercase tracking-wider font-semibold">
               <tr>
                 <th className="py-3.5 px-4">Invoice No.</th>
                 <th className="py-3.5 px-4">Customer Name</th>
@@ -248,25 +248,25 @@ export const SalesView: React.FC<SalesViewProps> = ({
                 <th className="py-3.5 px-4 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
               {filteredInvoices.length > 0 ? (
                 filteredInvoices.map((inv) => (
-                  <tr key={inv.id} className="hover:bg-gray-50/80 transition-colors">
-                    <td className="py-3 px-4 font-mono font-bold text-gray-800">
+                  <tr key={inv.id} className="hover:bg-gray-50/80 dark:hover:bg-gray-800/50 transition-colors">
+                    <td className="py-3 px-4 font-mono font-bold text-gray-800 dark:text-gray-200">
                       {inv.invoiceNumber}
                     </td>
-                    <td className="py-3 px-4 font-medium text-gray-900">{inv.customerName}</td>
-                    <td className="py-3 px-4 font-mono font-bold text-emerald-600">
+                    <td className="py-3 px-4 font-medium text-gray-900 dark:text-gray-100">{inv.customerName}</td>
+                    <td className="py-3 px-4 font-mono font-bold text-emerald-600 dark:text-emerald-400">
                       ₱{inv.totalAmount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </td>
-                    <td className="py-3 px-4 text-xs text-gray-500">
+                    <td className="py-3 px-4 text-xs text-gray-500 dark:text-gray-400">
                       {new Date(inv.dateIssued).toLocaleString()}
                     </td>
                     <td className="py-3 px-4 text-right">
                       <div className="inline-flex items-center gap-1.5">
                         <button
                           onClick={() => setViewingInvoice(inv)}
-                          className="px-2.5 py-1.5 text-xs font-semibold bg-[#00ADB5]/10 text-[#00ADB5] hover:bg-[#00ADB5] hover:text-white rounded-md transition-colors"
+                          className="px-2.5 py-1.5 text-xs font-semibold bg-[#00ADB5]/10 dark:bg-[#00ADB5]/20 text-[#00ADB5] hover:bg-[#00ADB5] hover:text-white rounded-md transition-colors cursor-pointer"
                         >
                           <Eye className="w-3.5 h-3.5 inline mr-1" />
                           View Info
@@ -277,7 +277,7 @@ export const SalesView: React.FC<SalesViewProps> = ({
                               onDeleteInvoice(inv.id);
                             }
                           }}
-                          className="px-2.5 py-1.5 text-xs font-semibold bg-red-50 text-red-600 hover:bg-red-600 hover:text-white rounded-md transition-colors"
+                          className="px-2.5 py-1.5 text-xs font-semibold bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400 hover:bg-red-600 hover:text-white rounded-md transition-colors cursor-pointer"
                         >
                           <Trash2 className="w-3.5 h-3.5 inline mr-1" />
                           Delete
@@ -288,8 +288,8 @@ export const SalesView: React.FC<SalesViewProps> = ({
                 ))
               ) : (
                 <tr>
-                  <td colSpan={5} className="py-12 text-center text-gray-400">
-                    <ShoppingCart className="w-10 h-10 mx-auto mb-2 text-gray-300" />
+                  <td colSpan={5} className="py-12 text-center text-gray-400 dark:text-gray-500">
+                    <ShoppingCart className="w-10 h-10 mx-auto mb-2 text-gray-300 dark:text-gray-600" />
                     No sales invoices recorded yet.
                   </td>
                 </tr>
@@ -302,8 +302,8 @@ export const SalesView: React.FC<SalesViewProps> = ({
       {/* MODAL 1: Add New Invoice (Product & Cart Selection) */}
       {isNewInvoiceOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs">
-          <div className="bg-white rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden border border-gray-200 max-h-[90vh] flex flex-col">
-            <div className="flex items-center justify-between px-6 py-4 bg-[#393E46] text-white">
+          <div className="bg-white dark:bg-[#1E2227] rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-800 max-h-[90vh] flex flex-col">
+            <div className="flex items-center justify-between px-6 py-4 bg-[#393E46] dark:bg-[#181A1E] text-white">
               <div className="flex items-center gap-2">
                 <ShoppingCart className="w-5 h-5 text-[#00ADB5]" />
                 <h2 className="text-lg font-bold">Add New Invoice</h2>
@@ -325,16 +325,16 @@ export const SalesView: React.FC<SalesViewProps> = ({
                   value={productSearch}
                   onChange={(e) => setProductSearch(e.target.value)}
                   placeholder="Filter available products..."
-                  className="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#00ADB5]"
+                  className="w-full pl-9 pr-3 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#00ADB5]"
                 />
               </div>
 
               {/* Product Selection List */}
-              <div className="border border-gray-200 rounded-xl overflow-hidden">
-                <div className="bg-gray-50 px-4 py-2 border-b border-gray-200 text-xs font-semibold text-gray-600 uppercase">
+              <div className="border border-gray-200 dark:border-gray-750/70 rounded-xl overflow-hidden">
+                <div className="bg-gray-50 dark:bg-gray-800/80 px-4 py-2 border-b border-gray-200 dark:border-gray-700 text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase">
                   Available Catalog Items
                 </div>
-                <div className="max-h-48 overflow-y-auto divide-y divide-gray-100">
+                <div className="max-h-48 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800">
                   {products
                     .filter((p) =>
                       productSearch ? p.productName.toLowerCase().includes(productSearch.toLowerCase()) : true
@@ -342,11 +342,11 @@ export const SalesView: React.FC<SalesViewProps> = ({
                     .map((p) => (
                       <div
                         key={p.id}
-                        className="px-4 py-2.5 flex items-center justify-between hover:bg-gray-50 text-sm"
+                        className="px-4 py-2.5 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-800/50 text-sm"
                       >
                         <div className="min-w-0 pr-2">
-                          <p className="font-semibold text-gray-900 truncate">{p.productName}</p>
-                          <p className="text-xs text-gray-500">
+                          <p className="font-semibold text-gray-900 dark:text-gray-100 truncate">{p.productName}</p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400">
                             ₱{p.retailPrice.toLocaleString('en-US', { minimumFractionDigits: 2 })} • Stock: {p.stockQuantity}
                           </p>
                         </div>
@@ -357,7 +357,7 @@ export const SalesView: React.FC<SalesViewProps> = ({
                           className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center gap-1 ${
                             p.stockQuantity > 0
                               ? 'bg-[#00ADB5] hover:bg-[#009299] text-white shadow-2xs'
-                              : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                              : 'bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-600 cursor-not-allowed'
                           }`}
                         >
                           <Plus className="w-3.5 h-3.5" />
@@ -369,16 +369,16 @@ export const SalesView: React.FC<SalesViewProps> = ({
               </div>
 
               {/* Cart Box */}
-              <div className="border border-gray-200 rounded-xl p-4 bg-gray-50/60">
+              <div className="border border-gray-200 dark:border-gray-700/80 rounded-xl p-4 bg-gray-50/60 dark:bg-gray-800/40">
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-sm font-bold text-gray-800 flex items-center gap-1.5">
+                  <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 flex items-center gap-1.5">
                     <ShoppingCart className="w-4 h-4 text-[#00ADB5]" />
                     <span>Cart ({cartItemCount} items)</span>
                   </h3>
                   {cart.length > 0 && (
                     <button
                       onClick={() => setCart([])}
-                      className="text-xs text-red-500 hover:underline"
+                      className="text-xs text-red-500 hover:underline cursor-pointer"
                     >
                       Clear
                     </button>
@@ -390,11 +390,11 @@ export const SalesView: React.FC<SalesViewProps> = ({
                     {cart.map((item) => (
                       <div
                         key={item.productId}
-                        className="flex items-center justify-between bg-white p-2.5 rounded-lg border border-gray-200 shadow-2xs text-sm"
+                        className="flex items-center justify-between bg-white dark:bg-gray-850 p-2.5 rounded-lg border border-gray-200 dark:border-gray-700 shadow-2xs text-sm"
                       >
                         <div className="truncate pr-2">
-                          <p className="font-semibold text-gray-900 truncate">{item.productName}</p>
-                          <p className="text-xs text-gray-500 font-mono">
+                          <p className="font-semibold text-gray-900 dark:text-gray-100 truncate">{item.productName}</p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400 font-mono">
                             ₱{item.price.toLocaleString('en-US', { minimumFractionDigits: 2 })} each
                           </p>
                         </div>
@@ -402,11 +402,11 @@ export const SalesView: React.FC<SalesViewProps> = ({
                           <button
                             type="button"
                             onClick={() => handleDecrementCart(item.productId)}
-                            className="w-6 h-6 rounded bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold flex items-center justify-center text-xs"
+                            className="w-6 h-6 rounded bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-bold flex items-center justify-center text-xs cursor-pointer"
                           >
                             <Minus className="w-3 h-3" />
                           </button>
-                          <span className="w-6 text-center font-bold font-mono text-sm">
+                          <span className="w-6 text-center font-bold font-mono text-sm text-gray-900 dark:text-gray-100">
                             {item.quantity}
                           </span>
                           <button
@@ -418,13 +418,13 @@ export const SalesView: React.FC<SalesViewProps> = ({
                             }}
                             className={`w-6 h-6 rounded flex items-center justify-center text-xs font-bold ${
                               item.quantity < item.maxStock
-                                ? 'bg-gray-100 hover:bg-gray-200 text-gray-700'
-                                : 'bg-gray-100 text-gray-300 cursor-not-allowed'
+                                ? 'bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 cursor-pointer'
+                                : 'bg-gray-100 dark:bg-gray-800 text-gray-300 dark:text-gray-600 cursor-not-allowed'
                             }`}
                           >
                             <Plus className="w-3 h-3" />
                           </button>
-                          <span className="font-mono font-bold text-gray-800 text-sm ml-2 w-20 text-right">
+                          <span className="font-mono font-bold text-gray-800 dark:text-gray-200 text-sm ml-2 w-20 text-right">
                             ₱{(item.price * item.quantity).toLocaleString('en-US', { minimumFractionDigits: 2 })}
                           </span>
                         </div>
@@ -432,26 +432,26 @@ export const SalesView: React.FC<SalesViewProps> = ({
                     ))}
                   </div>
                 ) : (
-                  <p className="text-xs text-center text-gray-400 py-6">
+                  <p className="text-xs text-center text-gray-400 dark:text-gray-500 py-6">
                     Cart is empty. Add products from the catalog above.
                   </p>
                 )}
               </div>
 
               {/* Total Amount Banner */}
-              <div className="flex items-center justify-between p-3 bg-emerald-50 border border-emerald-200 rounded-xl">
-                <span className="text-sm font-bold text-gray-800">Total Amount:</span>
-                <span className="text-xl font-bold font-mono text-emerald-600">
+              <div className="flex items-center justify-between p-3 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900/60 rounded-xl">
+                <span className="text-sm font-bold text-gray-800 dark:text-gray-200">Total Amount:</span>
+                <span className="text-xl font-bold font-mono text-emerald-600 dark:text-emerald-400">
                   ₱{cartTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </span>
               </div>
             </div>
 
-            <div className="p-4 bg-gray-50 border-t border-gray-200 flex justify-end gap-2">
+            <div className="p-4 bg-gray-50 dark:bg-gray-850 border-t border-gray-200 dark:border-gray-800 flex justify-end gap-2">
               <button
                 type="button"
                 onClick={() => setIsNewInvoiceOpen(false)}
-                className="px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-100 rounded-lg text-sm font-medium transition-colors"
+                className="px-4 py-2 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg text-sm font-medium transition-colors"
               >
                 Cancel
               </button>
@@ -462,7 +462,7 @@ export const SalesView: React.FC<SalesViewProps> = ({
                 className={`px-5 py-2 rounded-lg text-sm font-semibold transition-colors shadow-xs ${
                   cart.length > 0
                     ? 'bg-[#007FFF] hover:bg-[#006ee0] text-white cursor-pointer'
-                    : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    : 'bg-gray-300 dark:bg-gray-800 text-gray-500 dark:text-gray-600 cursor-not-allowed'
                 }`}
               >
                 Proceed to Checkout
@@ -475,8 +475,8 @@ export const SalesView: React.FC<SalesViewProps> = ({
       {/* MODAL 2: Confirm Invoice (Customer Entry & Finalization) */}
       {isConfirmOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs">
-          <div className="bg-white rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden border border-gray-200">
-            <div className="flex items-center justify-between px-6 py-4 bg-[#393E46] text-white">
+          <div className="bg-white dark:bg-[#1E2227] rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-800">
+            <div className="flex items-center justify-between px-6 py-4 bg-[#393E46] dark:bg-[#181A1E] text-white">
               <h2 className="text-lg font-bold">Confirm Invoice</h2>
               <button
                 onClick={() => setIsConfirmOpen(false)}
@@ -489,7 +489,7 @@ export const SalesView: React.FC<SalesViewProps> = ({
             <div className="p-6 space-y-4">
               {/* Customer Selector */}
               <div>
-                <label className="block text-xs font-semibold text-gray-700 uppercase mb-1">
+                <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase mb-1">
                   Customer Name *
                 </label>
                 <div className="space-y-2">
@@ -499,7 +499,7 @@ export const SalesView: React.FC<SalesViewProps> = ({
                       setSelectedCustomerId(e.target.value);
                       if (e.target.value) setCustomCustomerName('');
                     }}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#00ADB5] bg-white"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#00ADB5]"
                   >
                     <option value="">-- Choose Existing Customer --</option>
                     {customers.map((c) => (
@@ -515,16 +515,16 @@ export const SalesView: React.FC<SalesViewProps> = ({
                       value={customCustomerName}
                       onChange={(e) => setCustomCustomerName(e.target.value)}
                       placeholder="Or enter new / walk-in customer name..."
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#00ADB5]"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#00ADB5]"
                     />
                   )}
                 </div>
               </div>
 
               {/* Invoice Summary */}
-              <div className="border border-gray-200 rounded-xl overflow-hidden">
+              <div className="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-gray-100 text-gray-700 font-semibold uppercase">
+                  <thead className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-semibold uppercase">
                     <tr>
                       <th className="p-2.5">Product Name</th>
                       <th className="p-2.5 text-center">Qty</th>
@@ -532,15 +532,15 @@ export const SalesView: React.FC<SalesViewProps> = ({
                       <th className="p-2.5 text-right">Total</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-100">
+                  <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
                     {cart.map((item) => (
-                      <tr key={item.productId}>
-                        <td className="p-2.5 font-medium text-gray-900">{item.productName}</td>
-                        <td className="p-2.5 text-center font-mono">{item.quantity}</td>
-                        <td className="p-2.5 text-right font-mono text-gray-600">
+                      <tr key={item.productId} className="hover:bg-gray-50 dark:hover:bg-gray-800/40">
+                        <td className="p-2.5 font-medium text-gray-900 dark:text-gray-100">{item.productName}</td>
+                        <td className="p-2.5 text-center font-mono text-gray-700 dark:text-gray-300">{item.quantity}</td>
+                        <td className="p-2.5 text-right font-mono text-gray-600 dark:text-gray-400">
                           ₱{item.price.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                         </td>
-                        <td className="p-2.5 text-right font-mono font-bold text-gray-900">
+                        <td className="p-2.5 text-right font-mono font-bold text-gray-900 dark:text-gray-100">
                           ₱{(item.price * item.quantity).toLocaleString('en-US', { minimumFractionDigits: 2 })}
                         </td>
                       </tr>
@@ -550,18 +550,18 @@ export const SalesView: React.FC<SalesViewProps> = ({
               </div>
 
               {/* Total Banner */}
-              <div className="flex justify-between items-center p-3 bg-gray-50 rounded-xl border border-gray-200">
-                <span className="text-base font-bold text-gray-800">Total Amount:</span>
-                <span className="text-2xl font-bold font-mono text-emerald-600">
+              <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-800/60 rounded-xl border border-gray-200 dark:border-gray-700">
+                <span className="text-base font-bold text-gray-800 dark:text-gray-200">Total Amount:</span>
+                <span className="text-2xl font-bold font-mono text-emerald-600 dark:text-emerald-400">
                   ₱{cartTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </span>
               </div>
 
-              <div className="pt-2 flex justify-end gap-2 border-t border-gray-100">
+              <div className="pt-2 flex justify-end gap-2 border-t border-gray-100 dark:border-gray-800">
                 <button
                   type="button"
                   onClick={() => setIsConfirmOpen(false)}
-                  className="px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 rounded-lg text-sm font-medium transition-colors"
+                  className="px-4 py-2 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg text-sm font-medium transition-colors"
                 >
                   Back to Cart
                 </button>
@@ -581,9 +581,9 @@ export const SalesView: React.FC<SalesViewProps> = ({
       {/* MODAL 3: Invoice Info / Printable Receipt (Matching InvoiceInfoWindow.xaml) */}
       {viewingInvoice && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs">
-          <div className="bg-white rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden border border-gray-200 flex flex-col">
+          <div className="bg-white dark:bg-[#1E2227] rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-800 flex flex-col">
             {/* Header with Print */}
-            <div className="flex items-center justify-between px-6 py-4 bg-[#393E46] text-white no-print">
+            <div className="flex items-center justify-between px-6 py-4 bg-[#393E46] dark:bg-[#181A1E] text-white no-print">
               <div className="flex items-center gap-2">
                 <FileText className="w-5 h-5 text-[#00ADB5]" />
                 <h2 className="text-lg font-bold">Invoice Receipt</h2>
@@ -606,33 +606,33 @@ export const SalesView: React.FC<SalesViewProps> = ({
             </div>
 
             {/* Printable Area */}
-            <div className="p-8 space-y-6 text-gray-900 bg-white">
+            <div className="p-8 space-y-6 text-gray-900 dark:text-gray-100 bg-white dark:bg-[#1E2227]">
               {/* Receipt Header */}
-              <div className="text-center border-b border-gray-200 pb-4">
+              <div className="text-center border-b border-gray-200 dark:border-gray-700 pb-4">
                 <div className="text-3xl mb-1">🏺</div>
-                <h1 className="text-xl font-bold tracking-tight text-gray-900">Inventory App</h1>
-                <p className="text-xs text-gray-500">Fine Ceramics & Pottery Inventory</p>
-                <p className="text-xs font-mono text-gray-400 mt-1">Invoice #{viewingInvoice.invoiceNumber}</p>
+                <h1 className="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-100">Inventory App</h1>
+                <p className="text-xs text-gray-500 dark:text-gray-400">Fine Ceramics & Pottery Inventory</p>
+                <p className="text-xs font-mono text-gray-400 dark:text-gray-500 mt-1">Invoice #{viewingInvoice.invoiceNumber}</p>
               </div>
 
               {/* Details */}
-              <div className="grid grid-cols-2 text-sm bg-gray-50 p-3 rounded-xl border border-gray-100">
+              <div className="grid grid-cols-2 text-sm bg-gray-50 dark:bg-gray-800/60 p-3 rounded-xl border border-gray-100 dark:border-gray-700">
                 <div>
-                  <span className="block text-xs font-semibold text-gray-500 uppercase">Customer Name</span>
-                  <span className="font-bold text-gray-900">{viewingInvoice.customerName}</span>
+                  <span className="block text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Customer Name</span>
+                  <span className="font-bold text-gray-900 dark:text-gray-100">{viewingInvoice.customerName}</span>
                 </div>
                 <div className="text-right">
-                  <span className="block text-xs font-semibold text-gray-500 uppercase">Date Purchased</span>
-                  <span className="font-medium text-gray-700">
+                  <span className="block text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Date Purchased</span>
+                  <span className="font-medium text-gray-700 dark:text-gray-300">
                     {new Date(viewingInvoice.dateIssued).toLocaleDateString()}
                   </span>
                 </div>
               </div>
 
               {/* Items Table */}
-              <div className="border border-gray-200 rounded-xl overflow-hidden">
+              <div className="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
                 <table className="w-full text-left text-sm">
-                  <thead className="bg-[#393E46] text-white text-xs font-semibold uppercase">
+                  <thead className="bg-[#393E46] dark:bg-[#181A1E] text-white text-xs font-semibold uppercase">
                     <tr>
                       <th className="py-2.5 px-3">Product Name</th>
                       <th className="py-2.5 px-3 text-center">Qty</th>
@@ -640,15 +640,15 @@ export const SalesView: React.FC<SalesViewProps> = ({
                       <th className="py-2.5 px-3 text-right">Total</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-100">
+                  <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
                     {viewingInvoice.items?.map((item, idx) => (
-                      <tr key={idx} className="hover:bg-gray-50/50">
-                        <td className="py-2.5 px-3 font-medium text-gray-900">{item.productName}</td>
-                        <td className="py-2.5 px-3 text-center font-mono">{item.quantity}</td>
-                        <td className="py-2.5 px-3 text-right font-mono text-gray-600">
+                      <tr key={idx} className="hover:bg-gray-50/50 dark:hover:bg-gray-800/40">
+                        <td className="py-2.5 px-3 font-medium text-gray-900 dark:text-gray-100">{item.productName}</td>
+                        <td className="py-2.5 px-3 text-center font-mono text-gray-700 dark:text-gray-300">{item.quantity}</td>
+                        <td className="py-2.5 px-3 text-right font-mono text-gray-600 dark:text-gray-400">
                           ₱{item.price.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                         </td>
-                        <td className="py-2.5 px-3 text-right font-mono font-bold text-gray-900">
+                        <td className="py-2.5 px-3 text-right font-mono font-bold text-gray-900 dark:text-gray-100">
                           ₱{(item.price * item.quantity).toLocaleString('en-US', { minimumFractionDigits: 2 })}
                         </td>
                       </tr>
@@ -658,19 +658,19 @@ export const SalesView: React.FC<SalesViewProps> = ({
               </div>
 
               {/* Grand Total */}
-              <div className="flex justify-between items-center pt-2 border-t-2 border-gray-200">
-                <span className="text-lg font-bold text-gray-900">Total Amount:</span>
-                <span className="text-2xl font-bold font-mono text-emerald-600">
+              <div className="flex justify-between items-center pt-2 border-t-2 border-gray-200 dark:border-gray-700">
+                <span className="text-lg font-bold text-gray-900 dark:text-gray-100">Total Amount:</span>
+                <span className="text-2xl font-bold font-mono text-emerald-600 dark:text-emerald-400">
                   ₱{viewingInvoice.totalAmount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </span>
               </div>
 
-              <div className="text-center text-xs text-gray-400 pt-4 border-t border-dashed border-gray-200">
+              <div className="text-center text-xs text-gray-400 dark:text-gray-500 pt-4 border-t border-dashed border-gray-200 dark:border-gray-700">
                 Thank you for your business! Inventory App.
               </div>
             </div>
 
-            <div className="p-4 bg-gray-50 border-t border-gray-200 flex justify-end gap-2 no-print">
+            <div className="p-4 bg-gray-50 dark:bg-gray-850 border-t border-gray-200 dark:border-gray-800 flex justify-end gap-2 no-print">
               <button
                 type="button"
                 onClick={handlePrint}
@@ -682,7 +682,7 @@ export const SalesView: React.FC<SalesViewProps> = ({
               <button
                 type="button"
                 onClick={() => setViewingInvoice(null)}
-                className="px-5 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-lg text-sm font-medium transition-colors"
+                className="px-5 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 rounded-lg text-sm font-medium transition-colors"
               >
                 Close
               </button>

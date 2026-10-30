@@ -55,23 +55,23 @@ export const StockManagementView: React.FC<StockManagementViewProps> = ({
     <div className="space-y-6">
       {/* Title */}
       <div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 tracking-tight">
           Stock Management
         </h1>
-        <p className="text-sm text-gray-500 mt-1">
+        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
           Monitor inventory levels, restock inventory items, and track stock updates
         </p>
       </div>
 
       {/* Toolbar */}
-      <div className="bg-white p-4 rounded-2xl border border-gray-200/80 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-white dark:bg-[#1E2227] p-4 rounded-2xl border border-gray-200/80 dark:border-gray-800 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         {/* Sort by */}
-        <div className="flex items-center gap-2 text-sm text-gray-600">
+        <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
           <span className="font-medium whitespace-nowrap">Sort by:</span>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as any)}
-            className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#00ADB5] bg-white cursor-pointer"
+            className="px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#00ADB5] bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 cursor-pointer"
           >
             <option value="Name">Name</option>
             <option value="Stock Quantity">Stock Quantity</option>
@@ -87,16 +87,16 @@ export const StockManagementView: React.FC<StockManagementViewProps> = ({
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
             placeholder="Search stock..."
-            className="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#00ADB5]"
+            className="w-full pl-9 pr-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#00ADB5]"
           />
         </div>
       </div>
 
       {/* Stock DataGrid */}
-      <div className="bg-white rounded-2xl border border-gray-200/80 shadow-xs overflow-hidden">
+      <div className="bg-white dark:bg-[#1E2227] rounded-2xl border border-gray-200/80 dark:border-gray-800 shadow-xs overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm text-gray-700">
-            <thead className="bg-[#393E46] text-white text-xs uppercase tracking-wider font-semibold">
+          <table className="w-full text-left text-sm text-gray-700 dark:text-gray-300">
+            <thead className="bg-[#393E46] dark:bg-[#181A1E] text-white text-xs uppercase tracking-wider font-semibold">
               <tr>
                 <th className="py-3.5 px-4">Product Name</th>
                 <th className="py-3.5 px-4">Stock</th>
@@ -106,17 +106,17 @@ export const StockManagementView: React.FC<StockManagementViewProps> = ({
                 <th className="py-3.5 px-4 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
               {filteredProducts.length > 0 ? (
                 filteredProducts.map((p) => {
                   const isOutOfStock = p.stockQuantity === 0;
                   return (
-                    <tr key={p.id} className="hover:bg-gray-50/80 transition-colors">
-                      <td className="py-3 px-4 font-semibold text-gray-900">{p.productName}</td>
+                    <tr key={p.id} className="hover:bg-gray-50/80 dark:hover:bg-gray-800/50 transition-colors">
+                      <td className="py-3 px-4 font-semibold text-gray-900 dark:text-gray-100">{p.productName}</td>
                       <td className="py-3 px-4">
                         <span
                           className={`font-bold font-mono text-base ${
-                            isOutOfStock ? 'text-red-600' : 'text-emerald-600'
+                            isOutOfStock ? 'text-red-600 dark:text-red-400' : 'text-emerald-600 dark:text-emerald-400'
                           }`}
                         >
                           {p.stockQuantity}
@@ -124,21 +124,21 @@ export const StockManagementView: React.FC<StockManagementViewProps> = ({
                       </td>
                       <td className="py-3 px-4">
                         {isOutOfStock ? (
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-700 border border-red-200">
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-900/60">
                             <AlertCircle className="w-3.5 h-3.5" />
                             Out of Stock
                           </span>
                         ) : (
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/60">
                             <CheckCircle2 className="w-3.5 h-3.5" />
                             In Stock
                           </span>
                         )}
                       </td>
-                      <td className="py-3 px-4 font-mono text-gray-700">
+                      <td className="py-3 px-4 font-mono text-gray-700 dark:text-gray-300">
                         ₱{p.retailPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                       </td>
-                      <td className="py-3 px-4 text-xs text-gray-500">
+                      <td className="py-3 px-4 text-xs text-gray-500 dark:text-gray-400">
                         {new Date(p.dateUpdated).toLocaleString()}
                       </td>
                       <td className="py-3 px-4 text-right">
@@ -155,8 +155,8 @@ export const StockManagementView: React.FC<StockManagementViewProps> = ({
                 })
               ) : (
                 <tr>
-                  <td colSpan={6} className="py-12 text-center text-gray-400">
-                    <Warehouse className="w-10 h-10 mx-auto mb-2 text-gray-300" />
+                  <td colSpan={6} className="py-12 text-center text-gray-400 dark:text-gray-500">
+                    <Warehouse className="w-10 h-10 mx-auto mb-2 text-gray-300 dark:text-gray-600" />
                     No items found matching your criteria.
                   </td>
                 </tr>
@@ -169,8 +169,8 @@ export const StockManagementView: React.FC<StockManagementViewProps> = ({
       {/* Add Stock Modal */}
       {isModalOpen && selectedProduct && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs">
-          <div className="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden border border-gray-200">
-            <div className="flex items-center justify-between px-6 py-4 bg-[#393E46] text-white">
+          <div className="bg-white dark:bg-[#1E2227] rounded-2xl w-full max-w-md shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-800">
+            <div className="flex items-center justify-between px-6 py-4 bg-[#393E46] dark:bg-[#181A1E] text-white">
               <h2 className="text-lg font-bold">Add Stock: {selectedProduct.productName}</h2>
               <button
                 onClick={() => setIsModalOpen(false)}
@@ -181,15 +181,15 @@ export const StockManagementView: React.FC<StockManagementViewProps> = ({
             </div>
 
             <form onSubmit={handleConfirmStock} className="p-6 space-y-4">
-              <div className="bg-gray-50 p-3 rounded-xl border border-gray-100 flex justify-between items-center text-sm">
-                <span className="text-gray-500">Current Stock Quantity:</span>
-                <span className="font-bold text-gray-900 font-mono text-base">
+              <div className="bg-gray-50 dark:bg-gray-800/60 p-3 rounded-xl border border-gray-100 dark:border-gray-700/60 flex justify-between items-center text-sm">
+                <span className="text-gray-500 dark:text-gray-400">Current Stock Quantity:</span>
+                <span className="font-bold text-gray-900 dark:text-gray-100 font-mono text-base">
                   {selectedProduct.stockQuantity} units
                 </span>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-700 uppercase mb-1">
+                <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase mb-1">
                   Quantity to Add *
                 </label>
                 <input
@@ -198,7 +198,7 @@ export const StockManagementView: React.FC<StockManagementViewProps> = ({
                   required
                   value={quantityToAdd}
                   onChange={(e) => setQuantityToAdd(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#00ADB5]"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#00ADB5]"
                 />
               </div>
 
@@ -208,25 +208,25 @@ export const StockManagementView: React.FC<StockManagementViewProps> = ({
                     key={num}
                     type="button"
                     onClick={() => setQuantityToAdd(String(num))}
-                    className="flex-1 py-1.5 text-xs font-semibold bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-md border border-gray-200 cursor-pointer"
+                    className="flex-1 py-1.5 text-xs font-semibold bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-md border border-gray-200 dark:border-gray-700 cursor-pointer"
                   >
                     +{num}
                   </button>
                 ))}
               </div>
 
-              <div className="bg-teal-50/50 p-3 rounded-xl border border-teal-100 text-xs text-teal-800 flex justify-between">
+              <div className="bg-teal-50/50 dark:bg-teal-950/30 p-3 rounded-xl border border-teal-100 dark:border-teal-900/50 text-xs text-teal-800 dark:text-teal-300 flex justify-between">
                 <span>New Total Stock:</span>
                 <span className="font-bold font-mono">
                   {selectedProduct.stockQuantity + (parseInt(quantityToAdd, 10) || 0)} units
                 </span>
               </div>
 
-              <div className="pt-3 flex justify-end gap-2 border-t border-gray-100">
+              <div className="pt-3 flex justify-end gap-2 border-t border-gray-100 dark:border-gray-800">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 rounded-lg text-sm font-medium transition-colors"
+                  className="px-4 py-2 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg text-sm font-medium transition-colors"
                 >
                   Cancel
                 </button>

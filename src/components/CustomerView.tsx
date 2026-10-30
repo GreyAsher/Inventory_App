@@ -88,16 +88,16 @@ export const CustomerView: React.FC<CustomerViewProps> = ({
     <div className="space-y-6">
       {/* Page Title */}
       <div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 tracking-tight">
           Customer Management
         </h1>
-        <p className="text-sm text-gray-500 mt-1">
+        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
           Client directory, contact info, and purchase histories
         </p>
       </div>
 
       {/* Toolbar */}
-      <div className="bg-white p-4 rounded-2xl border border-gray-200/80 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-white dark:bg-[#1E2227] p-4 rounded-2xl border border-gray-200/80 dark:border-gray-800 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <button
           onClick={handleOpenAdd}
           className="flex items-center gap-1.5 px-4 py-2.5 bg-[#007FFF] hover:bg-[#006ee0] text-white rounded-lg text-sm font-semibold transition-colors cursor-pointer shadow-xs w-fit"
@@ -107,12 +107,12 @@ export const CustomerView: React.FC<CustomerViewProps> = ({
         </button>
 
         <div className="flex flex-wrap items-center gap-3">
-          <div className="flex items-center gap-2 text-sm text-gray-600">
+          <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
             <span className="font-medium whitespace-nowrap">Sort by:</span>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#00ADB5] bg-white cursor-pointer"
+              className="px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#00ADB5] bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 cursor-pointer"
             >
               <option value="Name">Name</option>
               <option value="Date Added">Date Added</option>
@@ -126,17 +126,17 @@ export const CustomerView: React.FC<CustomerViewProps> = ({
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
               placeholder="Search customer..."
-              className="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#00ADB5]"
+              className="w-full pl-9 pr-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#00ADB5]"
             />
           </div>
         </div>
       </div>
 
       {/* Customer Table */}
-      <div className="bg-white rounded-2xl border border-gray-200/80 shadow-xs overflow-hidden">
+      <div className="bg-white dark:bg-[#1E2227] rounded-2xl border border-gray-200/80 dark:border-gray-800 shadow-xs overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm text-gray-700">
-            <thead className="bg-[#393E46] text-white text-xs uppercase tracking-wider font-semibold">
+          <table className="w-full text-left text-sm text-gray-700 dark:text-gray-300">
+            <thead className="bg-[#393E46] dark:bg-[#181A1E] text-white text-xs uppercase tracking-wider font-semibold">
               <tr>
                 <th className="py-3.5 px-4">Customer Name</th>
                 <th className="py-3.5 px-4">Email</th>
@@ -146,40 +146,40 @@ export const CustomerView: React.FC<CustomerViewProps> = ({
                 <th className="py-3.5 px-4 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
               {filteredCustomers.length > 0 ? (
                 filteredCustomers.map((c) => {
                   const customerOrders = invoices.filter(
                     (inv) => inv.customerId === c.id || inv.customerName.toLowerCase() === c.fullName.toLowerCase()
                   );
                   return (
-                    <tr key={c.id} className="hover:bg-gray-50/80 transition-colors">
-                      <td className="py-3 px-4 font-semibold text-gray-900">{c.fullName}</td>
-                      <td className="py-3 px-4 text-gray-600">
+                    <tr key={c.id} className="hover:bg-gray-50/80 dark:hover:bg-gray-800/50 transition-colors">
+                      <td className="py-3 px-4 font-semibold text-gray-900 dark:text-gray-100">{c.fullName}</td>
+                      <td className="py-3 px-4 text-gray-600 dark:text-gray-300">
                         <span className="inline-flex items-center gap-1.5">
                           <Mail className="w-3.5 h-3.5 text-gray-400" />
                           {c.email || 'N/A'}
                         </span>
                       </td>
-                      <td className="py-3 px-4 text-gray-600 font-mono">
+                      <td className="py-3 px-4 text-gray-600 dark:text-gray-300 font-mono">
                         <span className="inline-flex items-center gap-1.5">
                           <Phone className="w-3.5 h-3.5 text-gray-400" />
                           {c.contactNumber || 'N/A'}
                         </span>
                       </td>
                       <td className="py-3 px-4">
-                        <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700">
+                        <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-400">
                           {customerOrders.length} orders
                         </span>
                       </td>
-                      <td className="py-3 px-4 text-xs text-gray-500">
+                      <td className="py-3 px-4 text-xs text-gray-500 dark:text-gray-400">
                         {new Date(c.dateAdded).toLocaleDateString()}
                       </td>
                       <td className="py-3 px-4 text-right">
                         <div className="inline-flex items-center gap-1.5">
                           <button
                             onClick={() => handleOpenEdit(c)}
-                            className="px-2.5 py-1.5 text-xs font-medium bg-[#00ADB5]/10 text-[#00ADB5] hover:bg-[#00ADB5] hover:text-white rounded-md transition-colors"
+                            className="px-2.5 py-1.5 text-xs font-medium bg-[#00ADB5]/10 dark:bg-[#00ADB5]/20 text-[#00ADB5] hover:bg-[#00ADB5] hover:text-white rounded-md transition-colors cursor-pointer"
                           >
                             <Edit2 className="w-3.5 h-3.5 inline mr-1" />
                             Edit
@@ -190,7 +190,7 @@ export const CustomerView: React.FC<CustomerViewProps> = ({
                                 onDeleteCustomer(c.id);
                               }
                             }}
-                            className="px-2.5 py-1.5 text-xs font-medium bg-red-50 text-red-600 hover:bg-red-600 hover:text-white rounded-md transition-colors"
+                            className="px-2.5 py-1.5 text-xs font-medium bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400 hover:bg-red-600 hover:text-white rounded-md transition-colors cursor-pointer"
                           >
                             <Trash2 className="w-3.5 h-3.5 inline mr-1" />
                             Delete
@@ -202,8 +202,8 @@ export const CustomerView: React.FC<CustomerViewProps> = ({
                 })
               ) : (
                 <tr>
-                  <td colSpan={6} className="py-12 text-center text-gray-400">
-                    <Users className="w-10 h-10 mx-auto mb-2 text-gray-300" />
+                  <td colSpan={6} className="py-12 text-center text-gray-400 dark:text-gray-500">
+                    <Users className="w-10 h-10 mx-auto mb-2 text-gray-300 dark:text-gray-600" />
                     No customers found matching search.
                   </td>
                 </tr>
@@ -216,8 +216,8 @@ export const CustomerView: React.FC<CustomerViewProps> = ({
       {/* Add / Edit Customer Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs">
-          <div className="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden border border-gray-200">
-            <div className="flex items-center justify-between px-6 py-4 bg-[#393E46] text-white">
+          <div className="bg-white dark:bg-[#1E2227] rounded-2xl w-full max-w-md shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-800">
+            <div className="flex items-center justify-between px-6 py-4 bg-[#393E46] dark:bg-[#181A1E] text-white">
               <h2 className="text-lg font-bold">
                 {editingCustomer ? 'Edit Customer' : 'Add New Customer'}
               </h2>
@@ -231,7 +231,7 @@ export const CustomerView: React.FC<CustomerViewProps> = ({
 
             <form onSubmit={handleSubmit} className="p-6 space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-gray-700 uppercase mb-1">
+                <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase mb-1">
                   Full Name *
                 </label>
                 <input
@@ -240,12 +240,12 @@ export const CustomerView: React.FC<CustomerViewProps> = ({
                   value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                   placeholder="e.g., Maria Santos"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#00ADB5]"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#00ADB5]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-700 uppercase mb-1">
+                <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase mb-1">
                   Contact Number
                 </label>
                 <input
@@ -253,12 +253,12 @@ export const CustomerView: React.FC<CustomerViewProps> = ({
                   value={formData.contactNumber}
                   onChange={(e) => setFormData({ ...formData, contactNumber: e.target.value })}
                   placeholder="+63 917 123 4567"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#00ADB5]"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#00ADB5]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-700 uppercase mb-1">
+                <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase mb-1">
                   Email Address
                 </label>
                 <input
@@ -266,15 +266,15 @@ export const CustomerView: React.FC<CustomerViewProps> = ({
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="customer@example.com"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#00ADB5]"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#00ADB5]"
                 />
               </div>
 
-              <div className="pt-3 flex justify-end gap-2 border-t border-gray-100">
+              <div className="pt-3 flex justify-end gap-2 border-t border-gray-100 dark:border-gray-800">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 rounded-lg text-sm font-medium transition-colors"
+                  className="px-4 py-2 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg text-sm font-medium transition-colors"
                 >
                   Cancel
                 </button>
